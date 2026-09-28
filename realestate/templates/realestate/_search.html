@@ -1,0 +1,7 @@
+<form class="search-panel" method="get" action="{% url 'properties' %}">
+  <div class="search-field"><label>Location</label><input name="q" value="{{ request.GET.q }}" placeholder="City, State or ZIP"></div>
+  <div class="search-field"><label>Bedrooms</label><select name="bed_min"><option value="">Any</option>{% for n in '12345' %}<option value="{{ n }}" {% if request.GET.bed_min == n %}selected{% endif %}>{{ n }}+</option>{% endfor %}</select></div>
+  <div class="search-field"><label>Bathrooms</label><select name="bath_min"><option value="">Any</option><option value="1">1+</option><option value="1.5">1.5+</option><option value="2">2+</option><option value="2.5">2.5+</option><option value="3">3+</option><option value="4">4+</option></select></div>
+  <div class="search-field"><label>Max Rent</label><input name="rent_max" value="{{ request.GET.rent_max }}" type="number" min="0" step="50" placeholder="Any"></div>
+  <button class="btn btn-primary" type="submit">⌕ Search</button>
+</form>

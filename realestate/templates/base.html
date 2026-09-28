@@ -1,0 +1,26 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}{{ site.company_name }}{% endblock %}</title>
+  <meta name="description" content="{{ site.tagline }}">
+  <link rel="stylesheet" href="{% static 'realestate/css/site.css' %}?v=4">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+<header class="site-header"><div class="container nav-wrap">
+  <a class="brand" href="{% url 'home' %}"><span class="brand-mark">⌂</span><span><strong>{{ site.company_name }}</strong><small>{{ site.tagline }}</small></span></a>
+  <nav><a class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a><a class="{% if request.resolver_match.url_name == 'properties' or request.resolver_match.url_name == 'property_detail' %}active{% endif %}" href="{% url 'properties' %}">Properties</a></nav>
+  <a class="header-cta" href="{% url 'properties' %}">Find a Home</a>
+</div></header>
+{% if messages %}<div class="flash-wrap container">{% for message in messages %}<div class="flash">{{ message }}</div>{% endfor %}</div>{% endif %}
+<main>{% block content %}{% endblock %}</main>
+<footer class="footer"><div class="container footer-grid">
+  <div><a class="brand" href="{% url 'home' %}"><span class="brand-mark">⌂</span><span><strong>{{ site.company_name }}</strong><small>{{ site.tagline }}</small></span></a><p>{{ site.footer_text }}</p></div>
+  <div><h4>Quick Links</h4><a href="{% url 'home' %}">Home</a><a href="{% url 'properties' %}">Properties</a></div>
+  <div><h4>Contact Us</h4>{% if site.contact_phone %}<a href="tel:{{ site.contact_phone }}">☎ {{ site.contact_phone }}</a>{% endif %}{% if site.contact_email %}<a href="mailto:{{ site.contact_email }}">✉ {{ site.contact_email }}</a>{% endif %}{% if site.contact_address %}<span>⌖ {{ site.contact_address }}</span>{% endif %}</div>
+  <div><h4>Follow Us</h4><div class="socials"><span>f</span><span>◎</span><span>in</span></div></div>
+</div><div class="container footer-bottom"><span>© {% now "Y" %} {{ site.company_name }}. All rights reserved.</span><span>Equal Housing Opportunity</span></div></footer>
+{% block extra_js %}{% endblock %}
+</body></html>

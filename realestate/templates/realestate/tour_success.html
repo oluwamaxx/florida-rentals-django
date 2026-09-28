@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Tour Request Received | {{ site.company_name }}{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><div class="eyebrow">REQUEST RECEIVED</div><h1>Your Self Tour Request Is <span>Submitted</span></h1><p>Thank you, {{ tour.name }}. Your request for {{ listing.title }} has been received.</p></div></section>
+<section class="section container tour-success-grid">
+  <div>
+    <div class="success-card">
+      <div class="eyebrow">NEXT STEP</div>
+      <h2>Call us to arrange your self-tour</h2>
+      <p>Your request has been submitted successfully. Please call the number below to arrange and confirm your self-tour.</p>
+      {% if site.self_tour_phone %}
+        <a class="btn btn-primary call-now" href="tel:{{ site.self_tour_phone }}">☎ Call {{ site.self_tour_phone }}</a>
+      {% else %}
+        <p class="call-missing">The self-tour phone number has not been entered yet. Please contact the rental office using the contact details below.</p>
+      {% endif %}
+    </div>
+    <div class="success-card property-summary">
+      <div class="eyebrow">HOME YOU REQUESTED</div>
+      <h2>{{ listing.title }}</h2>
+      <p>⌖ {{ listing.full_address }}</p>
+      <div class="big-stats"><span><b>{{ listing.bedrooms|floatformat:'-1' }}</b> Bedrooms</span><span><b>{{ listing.bathrooms|floatformat:'-1' }}</b> Bathrooms</span><span><b>{{ listing.square_feet|floatformat:0 }}</b> Sq Ft</span></div>
+    </div>
+  </div>
+  <div>
+    <div class="success-card">
+      <div class="eyebrow">YOUR PROPERTY</div>
+      <h2>{{ listing.title }}</h2>
+      <p>⌖ {{ listing.full_address }}</p>
+      <p>Your property location was available on the Schedule Self Tour form before you submitted your request.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
